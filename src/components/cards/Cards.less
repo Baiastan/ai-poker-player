@@ -1,0 +1,260 @@
+@card-width: 140px; // Assuming each card is 100px wide
+@card-height: 200px; // Assuming each card is 150px tall
+@left-gap: -60px;
+@top-gap: -56px;
+@gap: -28px;
+@heightSpades: @top-gap - @card-height + @gap + 2px;
+@heightHearts: @heightSpades + @heightSpades - (@gap * 2);
+@heightDiamonds: @heightHearts + @heightSpades - (@gap * 2);
+@sprite-sheet: 'cards.jpeg';
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card {
+  background-image: url(@sprite-sheet);
+  background-repeat: no-repeat;
+  background-size: 2420px 990px;
+  border-radius: 10px;
+  width: @card-width; /* width of a single card */
+  height: @card-height; /* height of a single card */
+}
+
+//back covers
+.card.blue {
+  background-position: @left-gap @top-gap;
+}
+
+.card.red {
+  background-position: @left-gap -733px;
+}
+
+//jokers
+
+.card.joker1 {
+  background-position: @left-gap @heightSpades;
+}
+
+.card.joker2 {
+  background-position: @left-gap @heightHearts;
+}
+
+//clubs
+.card.clubs2 {
+  background-position: -223px @top-gap;
+}
+
+.card.clubs3 {
+  background-position: -225px + @gap - @card-width @top-gap;
+}
+
+.card.clubs4 {
+  background-position: -559px @top-gap;
+}
+
+.card.clubs5 {
+  background-position: -725px @top-gap;
+}
+
+.card.clubs6 {
+  background-position: -891px @top-gap;
+}
+
+.card.clubs7 {
+  background-position: -1057px @top-gap;
+}
+
+.card.clubs8 {
+  background-position: -1223px @top-gap;
+}
+//166px
+
+.card.clubs9 {
+  background-position: -1389px @top-gap;
+}
+
+.card.clubs10 {
+  background-position: -1555px @top-gap;
+}
+
+.card.clubsJ {
+  background-position: -1721px @top-gap;
+}
+
+.card.clubsQ {
+  background-position: -1887px @top-gap;
+}
+
+.card.clubsK {
+  background-position: -2053px @top-gap;
+}
+
+.card.clubsA {
+  background-position: -2219px @top-gap;
+}
+
+//spades
+
+.card.spades2 {
+  background-position: -223px @heightSpades;
+}
+
+.card.spades3 {
+  background-position: -225px @heightSpades;
+}
+
+.card.spades4 {
+  background-position: -559px @heightSpades;
+}
+
+.card.spades5 {
+  background-position: -725px @heightSpades;
+}
+
+.card.spades6 {
+  background-position: -891px @heightSpades;
+}
+
+.card.spades7 {
+  background-position: -1057px @heightSpades;
+}
+
+.card.spades8 {
+  background-position: -1223px @heightSpades;
+}
+//166px
+
+.card.spades9 {
+  background-position: -1389px @heightSpades;
+}
+
+.card.spades10 {
+  background-position: -1555px @heightSpades;
+}
+
+.card.spadesJ {
+  background-position: -1721px @heightSpades;
+}
+
+.card.spadesQ {
+  background-position: -1887px @heightSpades;
+}
+
+.card.spadesK {
+  background-position: -2053px @heightSpades;
+}
+
+.card.spadesA {
+  background-position: -2219px @heightSpades;
+}
+
+//hearts
+
+.card.hearts2 {
+  background-position: -223px @heightHearts;
+}
+
+.card.hearts3 {
+  background-position: -225px @heightHearts;
+}
+
+.card.hearts4 {
+  background-position: -559px @heightHearts;
+}
+
+.card.hearts5 {
+  background-position: -725px @heightHearts;
+}
+
+.card.hearts6 {
+  background-position: -891px @heightHearts;
+}
+
+.card.hearts7 {
+  background-position: -1057px @heightHearts;
+}
+
+.card.hearts8 {
+  background-position: -1223px @heightHearts;
+}
+
+.card.hearts9 {
+  background-position: -1389px @heightHearts;
+}
+
+.card.hearts10 {
+  background-position: -1555px @heightHearts;
+}
+
+.card.heartsJ {
+  background-position: -1721px @heightHearts;
+}
+
+.card.heartsQ {
+  background-position: -1887px @heightHearts;
+}
+
+.card.heartsK {
+  background-position: -2053px @heightHearts;
+}
+
+.card.heartsA {
+  background-position: -2219px @heightHearts;
+}
+
+//diamonds
+
+.card.diamonds2 {
+  background-position: -223px @heightDiamonds;
+}
+
+.card.diamonds3 {
+  background-position: -225px @heightDiamonds;
+}
+
+.card.diamonds4 {
+  background-position: -559px @heightDiamonds;
+}
+
+.card.diamonds5 {
+  background-position: -725px @heightDiamonds;
+}
+
+.card.diamonds6 {
+  background-position: -891px @heightDiamonds;
+}
+
+.card.diamonds7 {
+  background-position: -1057px @heightDiamonds;
+}
+
+.card.diamonds8 {
+  background-position: -1223px @heightDiamonds;
+}
+
+.card.diamonds9 {
+  background-position: -1389px @heightDiamonds;
+}
+
+.card.diamonds10 {
+  background-position: -1555px @heightDiamonds;
+}
+
+.card.diamondsJ {
+  background-position: -1721px @heightDiamonds;
+}
+
+.card.diamondsQ {
+  background-position: -1887px @heightDiamonds;
+}
+
+.card.diamondsK {
+  background-position: -2053px @heightDiamonds;
+}
+
+.card.diamondsA {
+  background-position: -2219px @heightDiamonds;
+}
