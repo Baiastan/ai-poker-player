@@ -1,11 +1,10 @@
 import { FC } from 'react';
 
-interface SingleCardProps {
-  suit: string;
-  rank: string;
-}
+import './SingleCard.less';
+import { Card } from '../../types/card';
+import Extras from './Extras';
 
-const SingleCard: FC<SingleCardProps> = ({ suit, rank }) => {
+const SingleCard: FC<Card> = ({ suit, rank }) => {
   return <div className={`card ${suit}${rank}`}></div>;
 };
 

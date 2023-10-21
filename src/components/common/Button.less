@@ -1,0 +1,42 @@
+@import '../../styles/colors.less';
+
+.primaryButton {
+  background-color: @red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    transform: translateY((1px));
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(2px);
+    background-color: #ff7474;
+    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  &:disabled {
+    background-color: #c0c0c0;
+    color: rgba(255, 255, 255, 0.6); // Makes the text slightly transparent
+    cursor: not-allowed; // Indicates that the item is not interactive
+    box-shadow: none; // Removes the shadow
+
+    // Prevent any hover or active styles from being applied
+    &:hover,
+    &:active {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
