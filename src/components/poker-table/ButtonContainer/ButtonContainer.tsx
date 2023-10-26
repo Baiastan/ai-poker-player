@@ -8,41 +8,35 @@ interface ButtonContainerProps {
   shuffle: (init?: boolean) => void;
   onRenderCards: (num?: number) => void;
   cutCard: () => void;
-  isCut: boolean;
+  cut: boolean;
 }
 
 const ButtonContainer: FC<ButtonContainerProps> = ({
   shuffle,
   onRenderCards,
   cutCard,
-  isCut,
+  cut,
 }) => {
   return (
     <div className={styles.buttonContainer}>
       <PrimaryButton text={'Suffle'} onClick={() => shuffle()} />
       <PrimaryButton
         text={'Render All Cards'}
-        onClick={() => onRenderCards()}
+        onClick={() => onRenderCards(52)}
       />
       <PrimaryButton text={'Render 2 cards'} onClick={() => onRenderCards(2)} />
       <PrimaryButton text={'Cut'} onClick={() => cutCard()} color="orange" />
       <PrimaryButton
-        text={'Flop'}
-        disabled={!isCut}
+        text={'Three Card'}
+        disabled={!cut}
         onClick={() => onRenderCards(3)}
         color="blue"
       />
       <PrimaryButton
-        text={'Turn'}
-        disabled={!isCut}
+        text={'One Card'}
+        disabled={!cut}
         onClick={() => onRenderCards(1)}
         color="salmon"
-      />
-      <PrimaryButton
-        text={'River'}
-        disabled={!isCut}
-        onClick={() => onRenderCards(1)}
-        color="orange"
       />
       <PrimaryButton
         text={'Initialize'}

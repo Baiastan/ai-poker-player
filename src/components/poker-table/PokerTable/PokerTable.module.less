@@ -1,0 +1,67 @@
+@import '../../../styles/colors.less';
+@table-green: #004d1a; // Dark green for the table's outer area
+@felt-green: #00732b; // Lighter green for the inner felt area
+@rail-shadow: #003310; // Shadow color for the padded rail
+@font-family: 'Arial', sans-serif; // Consider importing a stylish font from Google Fonts for a more distinct look
+@header-height: 60px;
+@header-bg-color: #2e2e2e; // Dark gray background
+@header-text-color: #f7d488; // Gold-like color for contrast
+@action-ready-color: white; // Gray for "ready" state
+@action-active-color: #f7d488; // Gold-like color for active actions, matching previous theme
+@action-bg-color: @rail-shadow; // Slightly transparent black
+
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px; // Limit the width for larger screens
+  margin: auto;
+  margin-top: 20px;
+  background-color: @felt-green;
+  border: solid 15px @table-green; // This acts as the padded rail
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5); // Table shadow for a 3D effect
+  border-radius: 50px;
+
+  .footer {
+    display: flex;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    align-items: center; // Vertically centers the content
+    justify-content: space-between; // Separates items on both ends
+    height: @header-height;
+    padding: 0 20px; // Some padding on the sides
+    background-color: @header-bg-color;
+    color: @header-text-color;
+    font-family: @font-family;
+    font-size: 20px; // Adjust as needed
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); // Adds a subtle shadow below the header
+
+    .numberOfCuts {
+      background-color: rgba(0, 0, 0, 0.1);
+      padding: 5px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  }
+  .cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .actionText {
+    font-family: @font-family;
+    font-size: 20px; // Adjust as needed
+    padding: 5px 10px; // Some padding around the text
+    border-radius: 5px; // Slightly rounded corners
+    transition: color 0.3s ease; // Smooth transition for color changes
+    // Default "ready" state
+    color: @action-ready-color;
+    height: 20px;
+    // You can add a class for the "active" state in your component and style it here
+    &.active {
+      color: @action-active-color;
+    }
+  }
+}

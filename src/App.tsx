@@ -1,15 +1,10 @@
-import PokerTableView from './components/poker-table/PokerTableView';
 import './App.less';
-import { cards } from './components/cards/cardsData';
-import { useEffect, useState } from 'react';
-import { Card } from './types/card';
+import PokerTableView from './components/poker-table/PokerTableView';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const [deck, setDeck] = useState<Card[]>([]);
-
-  useEffect(() => {
-    setDeck(cards);
-  }, []);
+  const deck = useSelector((state) => state.deck.deck);
+  //const [deck, setDeck] = useState<Card[]>([]);
 
   return <PokerTableView deck={deck} />;
 }

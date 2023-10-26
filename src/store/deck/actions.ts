@@ -10,7 +10,7 @@ export const SET_SHUFFLED_DECK = 'SET_SHUFLLED_DECK';
 
 interface DeckCard {
   type: string;
-  payload: Card[];
+  payload?: Card[];
 }
 
 export const setCardDeck = (payload: Card[]): DeckCard => ({
@@ -18,27 +18,16 @@ export const setCardDeck = (payload: Card[]): DeckCard => ({
   payload,
 });
 
-export const setRenderedCards = (payload: Card[]): DeckCard => ({
-  type: SET_RENDERED_CARDS,
-  payload,
-});
-
-interface ToggleCut {
-  type: string;
-  isCut: boolean;
-}
-
-export const toggleCut = (isCut: boolean): ToggleCut => ({
-  type: TOGGLE_CUT,
-  isCut,
-});
-
-export const cutCard = (payload: Card[]): DeckCard => ({
+export const cutCard = (): DeckCard => ({
   type: CUT_CARD,
-  payload,
 });
 
-export const setShuffledCard = (payload: Card[]): DeckCard => ({
-  type: SET_SHUFFLED_DECK,
-  payload,
+export const shuffleDeck = (init: boolean) => ({
+  type: SHUFFLE_DECK,
+  init,
+});
+
+export const renderCards = (numToRender: number) => ({
+  type: RENDER_CARDS,
+  numToRender,
 });

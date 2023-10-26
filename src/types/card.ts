@@ -7,4 +7,13 @@ export interface Card {
 
 export interface Deck {
   deck: Card[];
+  shuffledCards: Card[];
+  actionText: string;
+  numberOfCuts: number;
+  numberOfShuffles: number;
+  renderedCards: Card[];
+  cut: boolean;
+  cutCard: () => void;
+  renderCards: () => Card[];
+  shuffleDeck: () => void;
 }
