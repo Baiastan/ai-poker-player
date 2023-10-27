@@ -25,6 +25,19 @@
     background-color: #ff7474;
     box-shadow: 0 0px 2px rgba(0, 0, 0, 0.2);
   }
+  &:focus {
+    outline: 3px solid gold; // A solid golden outline
+    box-shadow:
+      0 0 0 4px rgba(255, 215, 0, 0.8),
+      0 0 10px 4px rgba(0, 127, 255, 0.7); // A gold outer glow followed by a blue glow for depth
+    border-color: gold; // Makes the button border gold
+    background-color: rgba(
+      255,
+      215,
+      0,
+      0.1
+    ); // Gives a slight gold tint to the background
+  }
 
   &:disabled {
     background-color: #c0c0c0;
@@ -33,6 +46,78 @@
     box-shadow: none; // Removes the shadow
 
     // Prevent any hover or active styles from being applied
+    &:hover,
+    &:active {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.secondaryButton {
+  background: linear-gradient(
+    to bottom,
+    #e6e6e6 0%,
+    #dbdbdb 50%,
+    #d1d1d1 100%
+  ); // Gives a slight 3D effect
+  color: @black;
+  border: 2px solid gold; // A golden border for that luxury touch
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold; // Bold text for prominence
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); // Adds depth to the text
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); // A deeper shadow for a floating effect
+
+  &:hover {
+    transform: translateY(-2px); // A pronounced lift on hover
+    background: linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      #e6e6e6 50%,
+      #dbdbdb 100%
+    );
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  &:focus {
+    outline: 3px solid gold; // A solid golden outline
+    box-shadow:
+      0 0 0 4px rgba(255, 215, 0, 0.8),
+      0 0 10px 4px rgba(0, 127, 255, 0.7); // A gold outer glow followed by a blue glow for depth
+    border-color: gold; // Makes the button border gold
+    background-color: rgba(
+      255,
+      215,
+      0,
+      0.1
+    ); // Gives a slight gold tint to the background
+  }
+
+  &:active {
+    transform: translateY(1px); // Pressed down effect on click
+    background: linear-gradient(
+      to bottom,
+      #d1d1d1 0%,
+      #dbdbdb 50%,
+      #e6e6e6 100%
+    );
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  &:disabled {
+    border-color: #c0c0c0;
+    color: rgba(0, 0, 0, 0.6);
+    background: #f2f2f2;
+    cursor: not-allowed;
+    box-shadow: none;
+
     &:hover,
     &:active {
       transform: none;
