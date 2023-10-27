@@ -2,34 +2,37 @@ import { FC, ReactNode } from 'react';
 
 import './Button.less';
 
-interface PrimaryButtonProps {
+interface SecondaryButtonProps {
   children?: ReactNode;
   className?: string;
   text?: string;
   color?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
+  value?: string;
 }
 
-const PrimaryButton: FC<PrimaryButtonProps> = ({
+const SecondaryButton: FC<SecondaryButtonProps> = ({
   children,
   className,
   onClick,
   text,
   color,
   disabled,
+  value,
 }) => {
   return (
     <button
       onClick={onClick}
-      className={`primaryButton ${className}`}
+      className={`secondaryButton ${className}`}
       style={{ background: color }}
       disabled={disabled}
+      value={value}
     >
       {text}
-      {children ? children : null}
+      {children}
     </button>
   );
 };
 
-export default PrimaryButton;
+export default SecondaryButton;

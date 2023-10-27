@@ -1,5 +1,5 @@
-const suits: string[] = ['hearts', 'diamonds', 'clubs', 'spades'];
-const ranks: string[] = [
+export const suits: string[] = ['hearts', 'diamonds', 'clubs', 'spades'];
+export const ranks: string[] = [
   'A',
   '2',
   '3',
