@@ -17,9 +17,9 @@
     transform 0.2s,
     box-shadow 0.2s;
   display: inline-block; /* Allows padding and other styles */
-  margin-right: 15px; /* Space between buttons */
+  //margin-right: 15px; /* Space between buttons */
   text-align: center;
-  min-width: 100px; /* Ensures consistent width */
+  //min-width: 70px; /* Ensures consistent width */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
 }
 
@@ -33,6 +33,7 @@
 /* Active/Selected state */
 .radioButton input[type='radio']:checked + label {
   background-color: #111; /* Darker when active */
+  outline: 3px solid gold;
   border-color: #ffd700; /* Brighter gold border */
   transform: translateY(0); /* Reset any transformation */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7); /* Darker shadow */

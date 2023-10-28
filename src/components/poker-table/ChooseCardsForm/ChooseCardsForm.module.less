@@ -2,26 +2,30 @@
 
 .formContainer {
   background-color: @header-bg-color;
-
-  h2 {
-    color: white;
-  }
-
-  .suitesContainer {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
 
   .formHeader {
     display: flex;
     align-items: baseline;
+    justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+
+    .radioButtonsContainer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      width: 100%;
+    }
 
     h2 {
-      margin-bottom: 15x;
+      width: -webkit-fill-available;
+      text-align: center;
+      color: white;
     }
 
     > div {
@@ -33,11 +37,33 @@
     }
   }
 
+  .suitesContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    > :first-child,
+    > :nth-child(2) {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      width: -webkit-fill-available;
+
+      > button {
+        min-width: 100px;
+        justify-content: center;
+      }
+    }
+  }
+
   .ranksContainer {
     margin-top: 15px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-around;
     gap: 15px;
   }
 }

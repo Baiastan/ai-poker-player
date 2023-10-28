@@ -10,6 +10,7 @@ interface SecondaryButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   value?: string;
+  width?: string;
 }
 
 const SecondaryButton: FC<SecondaryButtonProps> = ({
@@ -20,12 +21,13 @@ const SecondaryButton: FC<SecondaryButtonProps> = ({
   color,
   disabled,
   value,
+  width,
 }) => {
   return (
     <button
       onClick={onClick}
       className={`button secondaryButton ${className}`}
-      style={{ background: color }}
+      style={{ background: color, width: `${width}px` }}
       disabled={disabled}
       value={value}
     >

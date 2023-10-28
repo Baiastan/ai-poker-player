@@ -102,6 +102,9 @@ const deckCardReducer = (state = initialState, action: any) => {
       } else if (state.get('shuffledCards').length <= 0) {
         return state.merge({
           ...initialState,
+          renderedCards: [],
+          selectedCards: [],
+          shuffledCards: cardShuffler(cards),
           actionText: 'empty deck - reinitiliazing',
         });
       } else {

@@ -20,7 +20,7 @@ import { Card } from '../../../types/card';
 import styles from './ChooseCardsForm.module.less';
 import RadioButton from '../../common/RadionButton';
 
-const ChooseCardsForm = ({ shuffledCards }) => {
+const ChooseCardsForm = ({ shuffledCards, actionText }) => {
   const [suit, setSuit] = useState('');
   const [rank, setRank] = useState('');
   // renderedCards: Card[];
@@ -57,8 +57,12 @@ const ChooseCardsForm = ({ shuffledCards }) => {
     <CardWrapper className={styles.formContainer}>
       <form onSubmit={submitHandler}>
         <div className={styles.formHeader}>
-          <h2>Select Cards</h2>
-          <div>
+          {actionText.length !== 0 ? (
+            <h2>{actionText}</h2>
+          ) : (
+            <h2>Select Cards</h2>
+          )}
+          <div className={styles.radioButtonsContainer}>
             <RadioButton
               id="renderedCards"
               name="destinationOption"
@@ -77,44 +81,49 @@ const ChooseCardsForm = ({ shuffledCards }) => {
           </div>
         </div>
         <div className={styles.suitesContainer}>
-          <PrimaryButton
-            color="white"
-            value="diamonds"
-            className={activeButton === 'diamonds' ? 'activePrimary' : ''}
-            onClick={(e) => setSuits(e.currentTarget.value)}
-          >
-            <DiamondsIcon width="40" height="40" />
-          </PrimaryButton>
-          <PrimaryButton
-            color="white"
-            className={activeButton === 'hearts' ? 'activePrimary' : ''}
-            value="hearts"
-            onClick={(e) => setSuits(e.currentTarget.value)}
-          >
-            <HeartsIcon width="40" height="40" />
-          </PrimaryButton>
-          <PrimaryButton
-            color="white"
-            className={activeButton === 'clubs' ? 'activePrimary' : ''}
-            value="clubs"
-            onClick={(e) => setSuits(e.currentTarget.value)}
-          >
-            <ClubsIcon width="40" height="40" />
-          </PrimaryButton>
-          <PrimaryButton
-            color="white"
-            className={activeButton === 'spades' ? 'activePrimary' : ''}
-            value="spades"
-            onClick={(e) => setSuits(e.currentTarget.value)}
-          >
-            <SpadesIcon height="40" width="40" />
-          </PrimaryButton>
+          <div>
+            <PrimaryButton
+              color="white"
+              value="diamonds"
+              className={activeButton === 'diamonds' ? 'activePrimary' : ''}
+              onClick={(e) => setSuits(e.currentTarget.value)}
+            >
+              <DiamondsIcon width="25" height="25" />
+            </PrimaryButton>
+            <PrimaryButton
+              color="white"
+              className={activeButton === 'hearts' ? 'activePrimary' : ''}
+              value="hearts"
+              onClick={(e) => setSuits(e.currentTarget.value)}
+            >
+              <HeartsIcon width="25" height="25" />
+            </PrimaryButton>
+          </div>
+          <div>
+            <PrimaryButton
+              color="white"
+              className={activeButton === 'clubs' ? 'activePrimary' : ''}
+              value="clubs"
+              onClick={(e) => setSuits(e.currentTarget.value)}
+            >
+              <ClubsIcon width="25" height="25" />
+            </PrimaryButton>
+            <PrimaryButton
+              color="white"
+              className={activeButton === 'spades' ? 'activePrimary' : ''}
+              value="spades"
+              onClick={(e) => setSuits(e.currentTarget.value)}
+            >
+              <SpadesIcon height="25" width="25" />
+            </PrimaryButton>
+          </div>
         </div>
         <div className={styles.ranksContainer}>
           {ranks.map((rank) => {
             return (
               <SecondaryButton
                 key={rank}
+                width="70"
                 onClick={(e) => {
                   setRank(e.currentTarget.value);
                 }}
