@@ -1,9 +1,6 @@
-interface Deck {
-  rank: string;
-  suit: string;
-}
+import { Card } from '../types/card';
 
-export const cardShuffler = (deck: Deck[]): Deck[] => {
+export const cardShuffler = (deck: Card[]): Card[] => {
   const shuffledDeck = [...deck];
 
   for (let i = shuffledDeck.length - 1; i > 0; i--) {
@@ -18,14 +15,14 @@ export const cardShuffler = (deck: Deck[]): Deck[] => {
 };
 
 export const renderAndPopCards = (
-  deck: Deck[],
+  deck: Card[],
   numToRender: number = 1,
-): { renderedCards: Deck[]; newDeck: Deck[] } => {
-  const renderedCards: Deck[] = [];
+): { renderedCards: Card[]; newDeck: Card[] } => {
+  const renderedCards: Card[] = [];
 
   for (let i = 0; i < numToRender; i++) {
     if (deck.length > 0) {
-      renderedCards.push(deck.pop() as Deck);
+      renderedCards.push(deck.pop() as Card);
     }
   }
 
@@ -33,4 +30,8 @@ export const renderAndPopCards = (
     renderedCards,
     newDeck: deck,
   };
+};
+
+export const popSelectedCard = (id: string, deck: Card[]): Card[] => {
+  return deck.filter((card) => card.id !== id);
 };

@@ -10,12 +10,33 @@
   .suitesContainer {
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 15px;
+  }
+
+  .formHeader {
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    h2 {
+      margin-bottom: 15x;
+    }
+
+    > div {
+      display: flex;
+      margin-bottom: 15px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
   }
 
   .ranksContainer {
     margin-top: 15px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
     gap: 15px;
   }

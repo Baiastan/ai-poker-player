@@ -18,10 +18,11 @@ export const ranks: string[] = [
 interface Card {
   suit: string;
   rank: string;
+  id: string;
 }
 
 export const cards: Card[] = suits.flatMap((suit) =>
-  ranks.map((rank) => ({ suit, rank })),
+  ranks.map((rank) => ({ suit, rank, id: `${suit}-${rank}` })),
 );
 
 export const extras: string[] = ['joker1', 'joker2', 'blue', 'red'];

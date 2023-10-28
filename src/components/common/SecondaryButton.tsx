@@ -24,7 +24,7 @@ const SecondaryButton: FC<SecondaryButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`secondaryButton ${className}`}
+      className={`button secondaryButton ${className}`}
       style={{ background: color }}
       disabled={disabled}
       value={value}

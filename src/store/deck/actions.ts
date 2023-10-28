@@ -7,6 +7,10 @@ export const TOGGLE_CUT = 'TOGGLE_CUT';
 export const CUT_CARD = 'CUT_CARD';
 export const SHUFFLE_DECK = 'SHUFFLE_DECK';
 export const SET_SHUFFLED_DECK = 'SET_SHUFLLED_DECK';
+export const SET_SELECTED_CARD = 'SET_SELECTED_CARD';
+export const SET_ACTION_TEXT = 'SET_ACTION_TEXT';
+export const SET_DESTINATION = 'SET_DESTINATION';
+export const DELETE_CARD = 'DELETE_CARD';
 
 interface DeckCard {
   type: string;
@@ -30,4 +34,31 @@ export const shuffleDeck = (init: boolean) => ({
 export const renderCards = (numToRender: number) => ({
   type: RENDER_CARDS,
   numToRender,
+});
+
+export const selectCard = (payload: Card) => ({
+  type: SET_SELECTED_CARD,
+  payload,
+});
+
+export const setActionText = (actionText: string) => ({
+  type: SET_ACTION_TEXT,
+  actionText,
+});
+
+export const setDestination = (destination: string) => ({
+  type: SET_DESTINATION,
+  destination,
+});
+
+interface DeleteCardProps {
+  destination: string;
+  card: Card;
+}
+
+export const deleteCard = ({ destination, card }: DeleteCardProps) => ({
+  type: DELETE_CARD,
+  id: card.id,
+  destination,
+  card,
 });
