@@ -14,11 +14,13 @@ import {
   selectCard,
   setActionText,
   setDestination,
+  shuffleDeck,
 } from '../../../store/deck/actions';
 import { Card } from '../../../types/card';
 
 import styles from './ChooseCardsForm.module.less';
 import RadioButton from '../../common/RadionButton';
+import Suggestions from '../ai-suggestions/Suggestions';
 
 const ChooseCardsForm = ({ shuffledCards, actionText }) => {
   const [suit, setSuit] = useState('');
@@ -43,8 +45,18 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
     }
   }, [suit, rank, dispatch]);
 
-  const submitHandler = (e: React.MouseEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    console.log('Submitting');
+    const response = await fetch('http://localhost:3001/api');
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(setActionText(data.message));
+    } else {
+      console.log('ERROR');
+    }
   };
 
   const setSuits = (value: string) => {
@@ -55,6 +67,7 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
 
   return (
     <CardWrapper className={styles.formContainer}>
+      <Suggestions />
       <form onSubmit={submitHandler}>
         <div className={styles.formHeader}>
           {actionText.length !== 0 ? (
@@ -133,6 +146,12 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
               </SecondaryButton>
             );
           })}
+          <PrimaryButton
+            text={'reset'}
+            onClick={() => dispatch(shuffleDeck(true))}
+            color={'black'}
+          />
+          <PrimaryButton type="submit">send</PrimaryButton>
         </div>
       </form>
     </CardWrapper>

@@ -10,23 +10,28 @@ interface PrimaryButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   value?: string;
   disabled?: boolean;
+  type?: string;
+  width?: string;
 }
 
 const PrimaryButton: FC<PrimaryButtonProps> = ({
   children,
-  className,
+  className = '',
   onClick,
   value,
   text,
   color,
   disabled,
+  type = 'button',
+  width,
 }) => {
   return (
     <button
       onClick={onClick}
       value={value}
+      type={type}
       className={`button primaryButton ${className}`}
-      style={{ background: color }}
+      style={{ background: color, width: `${width}px` }}
       disabled={disabled}
     >
       {text}

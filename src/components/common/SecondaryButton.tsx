@@ -15,7 +15,7 @@ interface SecondaryButtonProps {
 
 const SecondaryButton: FC<SecondaryButtonProps> = ({
   children,
-  className,
+  className = '',
   onClick,
   text,
   color,
@@ -29,6 +29,7 @@ const SecondaryButton: FC<SecondaryButtonProps> = ({
       className={`button secondaryButton ${className}`}
       style={{ background: color, width: `${width}px` }}
       disabled={disabled}
+      type="button"
       value={value}
     >
       {text}
