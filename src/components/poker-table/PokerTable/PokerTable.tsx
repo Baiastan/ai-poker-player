@@ -19,6 +19,7 @@ const PokerTable: FC<Deck> = ({
   cutCard,
   renderCards,
   shuffleDeck,
+  selectedCards,
 }) => {
   return (
     <div className={styles.container}>
@@ -31,16 +32,36 @@ const PokerTable: FC<Deck> = ({
         />
       </div>
       <div className={styles.cardsContainer}>
-        {shuffledCards.length === 52 && <Extras cover="blue" />}
-        {renderedCards.map((card, index: number) => {
-          return (
-            <SingleCard
-              key={`card-${index}`}
-              suit={card.suit}
-              rank={card.rank}
-            />
-          );
-        })}
+        <h2>Cards On Table</h2>
+        <div className={styles.renderedCardsContainer}>
+          {renderedCards.length === 0 && <Extras cover="blue" />}
+          {renderedCards.map((card) => {
+            return (
+              <SingleCard
+                key={card.id}
+                suit={card.suit}
+                id={card.id}
+                destination="renderedCards"
+                rank={card.rank}
+              />
+            );
+          })}
+        </div>
+        <h2>Cards On Hands</h2>
+        <div className={styles.cardsOnHandContainer}>
+          {selectedCards.length === 0 && <Extras cover="blue" />}
+          {selectedCards.map((card) => {
+            return (
+              <SingleCard
+                key={card.id}
+                suit={card.suit}
+                id={card.id}
+                destination="selectedCards"
+                rank={card.rank}
+              />
+            );
+          })}
+        </div>
       </div>
       <div className={styles.footer}>
         <div className={styles.numberOfCuts}>{numberOfCuts}</div>
@@ -57,6 +78,7 @@ const mapStateToProps = (state) => ({
   cut: state.deck.cut,
   renderedCards: state.deck.renderedCards,
   numberOfShuffles: state.deck.numberOfShuffles,
+  selectedCards: state.deck.selectedCards,
 });
 
 const mapDispatchToProps = (dispatch) => ({

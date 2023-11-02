@@ -1,7 +1,11 @@
 import { Record } from 'immutable';
 
 import * as actions from './actions';
-import { cardShuffler, renderAndPopCards } from '../../lib/utils';
+import {
+  cardShuffler,
+  popSelectedCard,
+  renderAndPopCards,
+} from '../../lib/utils';
 import { Card } from '../../types/card';
 import { cards } from '../../components/cards/cardsData';
 
@@ -10,26 +14,33 @@ interface DeckRecordProps {
   cut: boolean;
   renderedCards: Card[];
   shuffledCards: Card[];
+  selectedCards: Card[];
   numberOfCuts: number;
   actionText: string;
   numberOfShuffles: number;
+  destination: string;
+  numberOfPlayers: number;
 }
 
 const DeckRecordStructure: DeckRecordProps = {
   deck: cards,
   cut: false,
   renderedCards: [],
+  selectedCards: [],
   shuffledCards: cardShuffler(cards),
   numberOfCuts: 0,
+  destination: 'selectedCards',
   numberOfShuffles: 1,
   actionText: '',
+  numberOfPlayers: 0,
 };
 
 export const DeckRecord = Record(DeckRecordStructure);
 
 const initialState = new DeckRecord();
 
-const deckCardReducer = (state = initialState, action) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const deckCardReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case actions.CUT_CARD: {
       if (state.get('shuffledCards').length === 0) {
@@ -59,11 +70,16 @@ const deckCardReducer = (state = initialState, action) => {
             actionText: 'All Cards are rendered - Initializing',
           });
         }
-
         return state.merge({
           renderedCards: [...state.get('renderedCards'), ...renderedCards],
           shuffledCards: newDeck,
           actionText: 'No Cards In the Deck',
+        });
+      } else if (action.numToRender === 2) {
+        return state.merge({
+          selectedCards: [...state.get('selectedCards'), ...renderedCards],
+          shuffledCards: newDeck,
+          actionText: '',
         });
       } else {
         return state.merge({
@@ -74,12 +90,12 @@ const deckCardReducer = (state = initialState, action) => {
         });
       }
     }
-
     case actions.SHUFFLE_DECK: {
       if (action.init) {
         return state.merge({
           shuffledCards: cardShuffler(cards),
           renderedCards: [],
+          selectedCards: [],
           numberOfCuts: 0,
           cut: false,
           numberOfShuffles: 1,
@@ -88,6 +104,9 @@ const deckCardReducer = (state = initialState, action) => {
       } else if (state.get('shuffledCards').length <= 0) {
         return state.merge({
           ...initialState,
+          renderedCards: [],
+          selectedCards: [],
+          shuffledCards: cardShuffler(cards),
           actionText: 'empty deck - reinitiliazing',
         });
       } else {
@@ -97,6 +116,37 @@ const deckCardReducer = (state = initialState, action) => {
           numberOfShuffles: 1 + state.get('numberOfShuffles'),
         });
       }
+    }
+    case actions.SET_DESTINATION:
+      return state.merge({
+        destination: action.destination,
+      });
+    case actions.SET_ACTION_TEXT:
+      return state.merge({
+        actionText: action.actionText,
+      });
+    case actions.SET_SELECTED_CARD: {
+      const newDeck = popSelectedCard(
+        action.payload.id,
+        state.get('shuffledCards'),
+      );
+
+      const destination = state.get('destination');
+
+      return state.merge({
+        [destination]: [...state.get(destination), action.payload],
+        shuffledCards: newDeck,
+        actionText: '',
+      });
+    }
+
+    case actions.DELETE_CARD: {
+      const newDeck = popSelectedCard(action.id, state.get(action.destination));
+
+      return state.merge({
+        [action.destination]: newDeck,
+        shuffledCards: [...state.get('shuffledCards'), action.card],
+      });
     }
 
     default:

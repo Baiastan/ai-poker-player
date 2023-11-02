@@ -5,3 +5,36 @@ body,
   margin: 0;
   background-color: @navy-blue;
 }
+
+h2 {
+  margin: 2px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: @gold; // Use the gold color variable
+  background: linear-gradient(
+    45deg,
+    @dark-red,
+    @light-red,
+    @orange-red
+  ); // Use the red variables
+  padding: 10px 20px;
+  border: 3px solid @gold; // Use the gold color variable
+  border-radius: 10px;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.6); // Adds depth with shadow
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); // Adds shadow to the text for more depth
+  display: inline-block; // Allows padding, borders, and other styles to take effect
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}

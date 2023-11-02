@@ -2,21 +2,69 @@
 
 .formContainer {
   background-color: @header-bg-color;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 15px;
 
-  h2 {
-    color: white;
+  .formHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+
+    .radioButtonsContainer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    h2 {
+      width: -webkit-fill-available;
+      text-align: center;
+      color: white;
+    }
+
+    > div {
+      display: flex;
+      margin-bottom: 15px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
   }
 
   .suitesContainer {
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     gap: 15px;
+
+    > :first-child,
+    > :nth-child(2) {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      width: -webkit-fill-available;
+
+      > button {
+        min-width: 100px;
+        justify-content: center;
+      }
+    }
   }
 
   .ranksContainer {
     margin-top: 15px;
     display: flex;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-around;
     gap: 15px;
   }
 }
