@@ -19,6 +19,7 @@ interface DeckRecordProps {
   actionText: string;
   numberOfShuffles: number;
   destination: string;
+  numberOfPlayers: number;
 }
 
 const DeckRecordStructure: DeckRecordProps = {
@@ -31,6 +32,7 @@ const DeckRecordStructure: DeckRecordProps = {
   destination: 'selectedCards',
   numberOfShuffles: 1,
   actionText: '',
+  numberOfPlayers: 0,
 };
 
 export const DeckRecord = Record(DeckRecordStructure);
