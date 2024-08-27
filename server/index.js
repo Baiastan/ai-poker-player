@@ -24,6 +24,8 @@ app.post('/api/ai/poker', async (req, res) => {
 
   const { hand, flop, turn, river } = cardsToString(data);
 
+  console.log('DATA: ', data);
+
   let gameStage = 'Preflop';
   if (flop && !turn && !river) {
     gameStage = 'Flop';
@@ -34,13 +36,25 @@ app.post('/api/ai/poker', async (req, res) => {
   }
 
   const promt = PromptTemplate.fromTemplate(
-    `Keep in mind: Variant of the poker - Texas Hold'em. The current game stage is ${gameStage}. 
-    How strong is my hand with {hand}? ${
-      gameStage === 'Flop' ? 'Flop cards: {flop}.' : ''
-    } 
-    ${gameStage === 'Turn' ? 'Turn card: {turn}.' : ''} 
-    ${gameStage === 'River' ? 'River card: {river}.' : ''} 
-    Number of players: {numberOfPlayers}. Make it a short and precise answer.`,
+    `You are an expert in Texas Hold'em poker, which is a popular poker variant. 
+    In this game, players receive two private cards (known as 'hole cards') and then use five community cards to make the best possible five-card poker hand.
+    The possible hands range from high card (lowest) to royal flush (highest). 
+    The hand strength is calculated based on these poker rules.
+
+    The current game stage is ${gameStage}. 
+    - If no cards are on the table, it is called 'Preflop'. 
+    - If three community cards are on the table, it is the 'Flop'. 
+    - If there are four community cards, it is the 'Turn'. 
+    - If there are five community cards, it is the 'River'.
+
+    Now, based on the following information, please provide a short and accurate analysis of how strong my hand is:
+    - Hole cards: {hand}
+    - ${gameStage === 'Flop' ? 'Flop cards: {flop}.' : ''}
+    - ${gameStage === 'Turn' ? 'Turn card: {turn}.' : ''}
+    - ${gameStage === 'River' ? 'River card: {river}.' : ''}
+    - Number of players: 6
+
+    Give a short, precise assessment of the hand strength, considering the rules and strategies of Texas Hold'em.`,
   );
 
   const formattedPromt = await promt.format({
@@ -50,8 +64,6 @@ app.post('/api/ai/poker', async (req, res) => {
     river: river ? `River is ${river}` : 'River is yet to come',
     numberOfPlayers: 6,
   });
-
-  console.log(formattedPromt);
 
   const responseFromGpt = await llm.invoke(formattedPromt);
 
