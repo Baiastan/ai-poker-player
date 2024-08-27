@@ -2,45 +2,20 @@
   padding: 15px;
   display: flex;
   gap: 10px;
-  max-width: 1200px;
+  max-width: 1300px;
+  min-height: max-content;
+  overflow-y: auto;
   margin: auto;
-  height: 95vh;
+  margin-top: 50px;
 }
 
 .pokerTableWrapper > :first-child {
-  flex: 4;
-  max-width: 1200px;
+  max-width: 1300px;
+  height: max-content;
 }
 
 .pokerTableWrapper > :nth-child(2) {
   flex: 1;
+  height: auto;
   min-width: 320px;
-}
-
-//mobile styling below
-
-@media (max-width: 900px) {
-  .pokerTableWrapper {
-    flex-direction: column;
-    height: 100vh;
-    padding: 0;
-  }
-
-  /* Adjusting for second child to be on top */
-  .pokerTableWrapper > :first-child {
-    //order: 2;
-    display: none;
-  }
-
-  .pokerTableWrapper > :nth-child(2) {
-    order: 1;
-  }
-
-  /* Make children take all available space */
-  .pokerTableWrapper > :first-child,
-  .pokerTableWrapper > :nth-child(2) {
-    flex: 1 0 100%;
-    max-width: none; /* Override any max-width */
-    min-width: 0; /* Override any min-width to make it flexible */
-  }
 }

@@ -20,7 +20,6 @@ import { Card } from '../../../types/card';
 
 import styles from './ChooseCardsForm.module.less';
 import RadioButton from '../../common/RadionButton';
-import Suggestions from '../AI-Suggestions/Suggestions';
 
 const ChooseCardsForm = ({ shuffledCards, actionText }) => {
   const [suit, setSuit] = useState('');
@@ -76,7 +75,6 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
 
   return (
     <CardWrapper className={styles.formContainer}>
-      <Suggestions suggestions={'suggestion'} />
       <form onSubmit={submitHandler}>
         <div className={styles.formHeader}>
           {actionText.length !== 0 ? (

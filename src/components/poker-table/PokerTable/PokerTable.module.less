@@ -14,7 +14,6 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  //max-width: 1200px; // Limit the width for larger screens
 
   background-color: @felt-green;
   border: solid 15px @table-green; // This acts as the padded rail
@@ -48,15 +47,14 @@
     padding: 20px;
     flex-direction: column;
     gap: 10px;
-    border: 1px solid red;
 
     .renderedCardsContainer,
     .cardsOnHandContainer {
       display: flex;
-
+      flex-wrap: wrap;
       overflow-x: auto; /* Enables horizontal scrolling */
       gap: 10px; /* Keeps a gap between items */
-      border: 1px solid red; /* For visibility */
+
       width: 100%; /* Adjust based on your layout */
     }
   }

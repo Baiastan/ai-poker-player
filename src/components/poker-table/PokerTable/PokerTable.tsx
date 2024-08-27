@@ -65,7 +65,6 @@ const PokerTable: FC<Deck> = ({
       </div>
       <div className={styles.footer}>
         <div className={styles.numberOfCuts}>{numberOfCuts}</div>
-        {<div className={styles.actionText}>{actionText}</div>}
       </div>
     </div>
   );
