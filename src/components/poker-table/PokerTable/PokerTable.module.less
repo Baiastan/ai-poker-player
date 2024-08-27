@@ -15,8 +15,7 @@
   display: flex;
   flex-direction: column;
   //max-width: 1200px; // Limit the width for larger screens
-  margin: auto;
-  margin-top: 20px;
+
   background-color: @felt-green;
   border: solid 15px @table-green; // This acts as the padded rail
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5); // Table shadow for a 3D effect
@@ -45,16 +44,20 @@
   }
   .cardsContainer {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     padding: 20px;
     flex-direction: column;
     gap: 10px;
+    border: 1px solid red;
 
     .renderedCardsContainer,
     .cardsOnHandContainer {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+
+      overflow-x: auto; /* Enables horizontal scrolling */
+      gap: 10px; /* Keeps a gap between items */
+      border: 1px solid red; /* For visibility */
+      width: 100%; /* Adjust based on your layout */
     }
   }
 

@@ -3,6 +3,8 @@ import React from 'react';
 import styles from './Suggestions.module.less';
 
 const Suggestions = ({ suggestions }) => {
+  console.log(suggestions);
+
   return (
     <div className={styles.suggestionsContainer}>
       <div>

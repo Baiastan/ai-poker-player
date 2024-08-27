@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { connect } from 'react-redux';
 
-import { Card, Deck } from '../../../types/card';
+import { Deck } from '../../../types/card';
 
 import SingleCard from '../../cards/SingleCard';
 import ButtonContainer from '../ButtonContainer/ButtonContainer';
@@ -11,7 +11,7 @@ import * as cardActions from '../../../store/deck/actions';
 import styles from './PokerTable.module.less';
 
 const PokerTable: FC<Deck> = ({
-  shuffledCards,
+  //shuffledCards,
   actionText,
   numberOfCuts,
   renderedCards,

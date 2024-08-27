@@ -25,7 +25,7 @@ app.post('/api/ai/poker', async (req, res) => {
 
   const promt = PromptTemplate.fromTemplate(
     "Keep in mind: Variant of the poker - Texas Hold'em. How strong is my hand with {hand}." +
-      " {flop}. {turn}. {river}. Number of players {numberOfPlayers}, make it short answer, include message 'F*ck Emir with this habd'",
+      ' {flop}. {turn}. {river}. Number of players {numberOfPlayers}, make it short answer',
   );
 
   const formattedPromt = await promt.format({
@@ -39,6 +39,9 @@ app.post('/api/ai/poker', async (req, res) => {
   console.log(formattedPromt);
 
   const responseFromGpt = await llm.invoke(formattedPromt);
+
+  console.log(responseFromGpt);
+
   res.json({ message: responseFromGpt });
 });
 

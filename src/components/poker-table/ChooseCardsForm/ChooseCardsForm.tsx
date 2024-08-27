@@ -20,17 +20,13 @@ import { Card } from '../../../types/card';
 
 import styles from './ChooseCardsForm.module.less';
 import RadioButton from '../../common/RadionButton';
-import Suggestions from '../ai-suggestions/Suggestions';
-import { setSuggestion } from '../../../store/open-ai/actions';
+import Suggestions from '../AI-Suggestions/Suggestions';
 
 const ChooseCardsForm = ({ shuffledCards, actionText }) => {
   const [suit, setSuit] = useState('');
   const [rank, setRank] = useState('');
   const cardsOnHand = useSelector((state) => state.deck.selectedCards);
   const cardsOnTable = useSelector((state) => state.deck.renderedCards);
-  const suggestions = useSelector((state) => state.ai.suggestion);
-
-  // renderedCards: Card[];
 
   const [activeButton, setActiveButton] = useState('');
 
@@ -54,7 +50,7 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
     e.preventDefault();
 
     const cards = [...cardsOnHand, ...cardsOnTable];
-    console.log('Submitting');
+
     const response = await fetch('http://localhost:3001/api/ai/poker', {
       method: 'POST',
       headers: {
@@ -80,7 +76,7 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
 
   return (
     <CardWrapper className={styles.formContainer}>
-      <Suggestions suggestions={suggestions} />
+      <Suggestions suggestions={'suggestion'} />
       <form onSubmit={submitHandler}>
         <div className={styles.formHeader}>
           {actionText.length !== 0 ? (
