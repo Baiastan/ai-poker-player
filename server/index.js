@@ -16,6 +16,7 @@ app.use(cors());
 
 const llm = new OpenAI({
   openAIApiKey: process.env.OPENAI_API_KEY,
+  modelName: 'gpt-3.5-turbo',
 });
 
 app.post('/api/ai/poker', async (req, res) => {
@@ -23,9 +24,23 @@ app.post('/api/ai/poker', async (req, res) => {
 
   const { hand, flop, turn, river } = cardsToString(data);
 
+  let gameStage = 'Preflop';
+  if (flop && !turn && !river) {
+    gameStage = 'Flop';
+  } else if (flop && turn && !river) {
+    gameStage = 'Turn';
+  } else if (flop && turn && river) {
+    gameStage = 'River';
+  }
+
   const promt = PromptTemplate.fromTemplate(
-    "Keep in mind: Variant of the poker - Texas Hold'em. How strong is my hand with {hand}." +
-      ' {flop}. {turn}. {river}. Number of players {numberOfPlayers}, make it short answer',
+    `Keep in mind: Variant of the poker - Texas Hold'em. The current game stage is ${gameStage}. 
+    How strong is my hand with {hand}? ${
+      gameStage === 'Flop' ? 'Flop cards: {flop}.' : ''
+    } 
+    ${gameStage === 'Turn' ? 'Turn card: {turn}.' : ''} 
+    ${gameStage === 'River' ? 'River card: {river}.' : ''} 
+    Number of players: {numberOfPlayers}. Make it a short and precise answer.`,
   );
 
   const formattedPromt = await promt.format({
