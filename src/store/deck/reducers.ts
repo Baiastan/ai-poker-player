@@ -6,7 +6,7 @@ import {
   popSelectedCard,
   renderAndPopCards,
 } from '../../lib/utils';
-import { Card } from '../../types/card';
+import { Card, ResponseData } from '../../types/card';
 import { cards } from '../../components/cards/cardsData';
 
 interface DeckRecordProps {
@@ -17,6 +17,7 @@ interface DeckRecordProps {
   selectedCards: Card[];
   numberOfCuts: number;
   actionText: string;
+  responseData: ResponseData;
   numberOfShuffles: number;
   destination: string;
   numberOfPlayers: number;
@@ -25,6 +26,16 @@ interface DeckRecordProps {
 const DeckRecordStructure: DeckRecordProps = {
   deck: cards,
   cut: false,
+  responseData: {
+    currentRank: '',
+    handStrength: 0,
+    aiSuggestion: '',
+    params: {
+      action: '',
+      level: '',
+      color: '#2e2e2e',
+    },
+  },
   renderedCards: [],
   selectedCards: [],
   shuffledCards: cardShuffler(cards),
@@ -55,6 +66,13 @@ const deckCardReducer = (state = initialState, action: any) => {
         actionText: 'Cut',
       });
     }
+
+    case actions.SET_RESPONSE_DATA: {
+      return state.merge({
+        responseData: action.payload,
+      });
+    }
+
     case actions.RENDER_CARDS: {
       const { renderedCards, newDeck } = renderAndPopCards(
         state.get('shuffledCards'),

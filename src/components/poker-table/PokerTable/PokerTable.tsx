@@ -11,16 +11,16 @@ import * as cardActions from '../../../store/deck/actions';
 import styles from './PokerTable.module.less';
 
 const PokerTable: FC<Deck> = ({
-  //shuffledCards,
-  actionText,
   numberOfCuts,
   renderedCards,
+  responseData,
   cut,
   cutCard,
   renderCards,
   shuffleDeck,
   selectedCards,
 }) => {
+  console.log(responseData);
   return (
     <div className={styles.container}>
       <div>
@@ -47,7 +47,12 @@ const PokerTable: FC<Deck> = ({
             );
           })}
         </div>
-        <h2>Cards On Hands</h2>
+        <h2>
+          Cards On Hands{' '}
+          <span className={styles.actionClass}>
+            Action: {responseData.params.action.toUpperCase()}
+          </span>
+        </h2>
         <div className={styles.cardsOnHandContainer}>
           {selectedCards.length === 0 && <Extras cover="blue" />}
           {selectedCards.map((card) => {
@@ -63,8 +68,13 @@ const PokerTable: FC<Deck> = ({
           })}
         </div>
       </div>
-      <div className={styles.footer}>
+      <div
+        className={styles.footer}
+        style={{ backgroundColor: responseData.params.color }}
+      >
         <div className={styles.numberOfCuts}>{numberOfCuts}</div>
+        <div>{responseData.currentRank}</div>
+        <div>Points: {responseData.handStrength}</div>
       </div>
     </div>
   );
@@ -75,6 +85,7 @@ const mapStateToProps = (state) => ({
   actionText: state.deck.actionText,
   numberOfCuts: state.deck.numberOfCuts,
   cut: state.deck.cut,
+  responseData: state.deck.responseData,
   renderedCards: state.deck.renderedCards,
   numberOfShuffles: state.deck.numberOfShuffles,
   selectedCards: state.deck.selectedCards,

@@ -11,11 +11,17 @@ export const SET_SELECTED_CARD = 'SET_SELECTED_CARD';
 export const SET_ACTION_TEXT = 'SET_ACTION_TEXT';
 export const SET_DESTINATION = 'SET_DESTINATION';
 export const DELETE_CARD = 'DELETE_CARD';
+export const SET_RESPONSE_DATA = 'SET_RESPONSE_DATA';
 
 interface DeckCard {
   type: string;
   payload?: Card[];
 }
+
+export const setResponseData = (payload: object) => ({
+  type: SET_RESPONSE_DATA,
+  payload,
+});
 
 export const setCardDeck = (payload: Card[]): DeckCard => ({
   type: SET_CARD_DECK,

@@ -14,6 +14,7 @@ import {
   selectCard,
   setActionText,
   setDestination,
+  setResponseData,
   shuffleDeck,
 } from '../../../store/deck/actions';
 import { Card } from '../../../types/card';
@@ -59,9 +60,11 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
     });
 
     if (response.ok) {
-      const data = await response.json();
+      const res = await response.json();
+      console.log(res);
       //dispatch(setSuggestion(data.message));
-      dispatch(setActionText(data.message));
+      dispatch(setActionText(res.data?.aiSuggestion));
+      dispatch(setResponseData(res.data));
     } else {
       console.log('ERROR');
     }
@@ -78,7 +81,7 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
       <form onSubmit={submitHandler}>
         <div className={styles.formHeader}>
           {actionText.length !== 0 ? (
-            <h2>{actionText}</h2>
+            <h2 className={styles.actionTextWrapper}>{actionText}</h2>
           ) : (
             <h2>Select Cards</h2>
           )}
