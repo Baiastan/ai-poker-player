@@ -67,9 +67,14 @@ const ChooseCardsForm: FC<ChooseCardsForm> = ({
   const submitHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const apiUrl =
+      process.env.NODE_ENV === 'development'
+        ? import.meta.env.VITE_DEV_API
+        : import.meta.env.VITE_PROD_API;
+
     const cards = [...cardsOnHand, ...cardsOnTable];
 
-    const response = await fetch('http://localhost:3001/api/ai/poker', {
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
