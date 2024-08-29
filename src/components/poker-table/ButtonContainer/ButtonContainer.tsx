@@ -1,14 +1,14 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import PrimaryButton from '../../common/PrimaryButton';
 
 import styles from './ButtonContainer.module.less';
 
 interface ButtonContainerProps {
-  shuffle: (init?: boolean) => void;
-  onRenderCards: (num?: number) => void;
-  cutCard: () => void;
-  cut: boolean;
+  shuffle: Function;
+  onRenderCards: Function;
+  cutCard: Function;
+  cut: Function;
 }
 
 const ButtonContainer: FC<ButtonContainerProps> = ({

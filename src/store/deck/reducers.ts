@@ -152,6 +152,7 @@ const deckCardReducer = (state = initialState, action: any) => {
       const destination = state.get('destination');
 
       return state.merge({
+        // @ts-ignore
         [destination]: [...state.get(destination), action.payload],
         shuffledCards: newDeck,
         actionText: '',

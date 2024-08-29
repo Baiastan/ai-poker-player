@@ -10,7 +10,7 @@ interface PrimaryButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   value?: string;
   disabled?: boolean;
-  type?: string;
+  type?: 'button' | 'reset' | 'submit';
   width?: string;
 }
 

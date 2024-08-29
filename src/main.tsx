@@ -6,6 +6,7 @@ import { legacy_createStore, compose } from 'redux';
 import rootReducer from './store/rootReducer.ts';
 import { Provider } from 'react-redux';
 
+// Use the extended type for window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = legacy_createStore(rootReducer, composeEnhancers());

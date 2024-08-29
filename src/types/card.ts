@@ -33,3 +33,7 @@ export interface Deck {
   renderCards: () => Card[];
   shuffleDeck: () => void;
 }
+
+export interface RootState {
+  deck: Deck;
+}

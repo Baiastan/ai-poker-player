@@ -13,7 +13,16 @@ const SingleCard: FC<SingleCardProps> = ({ suit, rank, id, destination }) => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteCard({ destination, card: { suit, rank, id } }));
+    dispatch(
+      deleteCard({
+        destination,
+        card: {
+          suit,
+          rank,
+          id,
+        },
+      }),
+    );
   };
 
   return (

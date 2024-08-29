@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CardWrapper from '../../common/CardWrapper';
 
@@ -17,16 +17,28 @@ import {
   setResponseData,
   shuffleDeck,
 } from '../../../store/deck/actions';
-import { Card } from '../../../types/card';
+import { Card, RootState } from '../../../types/card';
 
 import styles from './ChooseCardsForm.module.less';
 import RadioButton from '../../common/RadionButton';
 
-const ChooseCardsForm = ({ shuffledCards, actionText }) => {
+type ChooseCardsForm = {
+  shuffledCards: Card[];
+  actionText: string;
+};
+
+const ChooseCardsForm: FC<ChooseCardsForm> = ({
+  shuffledCards,
+  actionText,
+}) => {
   const [suit, setSuit] = useState('');
   const [rank, setRank] = useState('');
-  const cardsOnHand = useSelector((state) => state.deck.selectedCards);
-  const cardsOnTable = useSelector((state) => state.deck.renderedCards);
+  const cardsOnHand = useSelector(
+    (state: RootState) => state.deck.selectedCards,
+  );
+  const cardsOnTable = useSelector(
+    (state: RootState) => state.deck.renderedCards,
+  );
 
   const [activeButton, setActiveButton] = useState('');
 
@@ -39,7 +51,13 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
       );
 
       if (!isCardInDeck) {
-        dispatch(selectCard({ suit, rank, id: `${suit}-${rank}` }));
+        dispatch(
+          selectCard({
+            suit,
+            rank,
+            id: `${suit}-${rank}`,
+          }),
+        );
       } else {
         dispatch(setActionText('Card has already been selected!'));
       }
