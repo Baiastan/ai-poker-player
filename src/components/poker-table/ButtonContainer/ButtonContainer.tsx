@@ -19,7 +19,7 @@ const ButtonContainer: FC<ButtonContainerProps> = ({
 }) => {
   return (
     <div className={styles.buttonContainer}>
-      <PrimaryButton text={'Suffle'} onClick={() => shuffle()} />
+      <PrimaryButton text={'Shuffle'} onClick={() => shuffle()} />
       <PrimaryButton
         text={'Render All Cards'}
         onClick={() => onRenderCards(52)}
