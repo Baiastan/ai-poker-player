@@ -33,6 +33,7 @@ const ChooseCardsForm: FC<ChooseCardsForm> = ({
 }) => {
   const [suit, setSuit] = useState('');
   const [rank, setRank] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
   const cardsOnHand = useSelector(
     (state: RootState) => state.deck.selectedCards,
   );
@@ -64,6 +65,20 @@ const ChooseCardsForm: FC<ChooseCardsForm> = ({
     }
   }, [suit, rank, dispatch]);
 
+  useEffect(() => {
+    const bool = disableSendButton();
+
+    setIsDisabled(bool);
+  }, [cardsOnHand, cardsOnTable]);
+
+  const disableSendButton = () => {
+    if ([...cardsOnHand, ...cardsOnTable].length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const submitHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -73,6 +88,10 @@ const ChooseCardsForm: FC<ChooseCardsForm> = ({
         : import.meta.env.VITE_PROD_API;
 
     const cards = [...cardsOnHand, ...cardsOnTable];
+
+    if (cards.length < 0) {
+      return;
+    }
 
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -184,7 +203,9 @@ const ChooseCardsForm: FC<ChooseCardsForm> = ({
             onClick={() => dispatch(shuffleDeck(true))}
             color={'black'}
           />
-          <PrimaryButton type="submit">send</PrimaryButton>
+          <PrimaryButton disabled={isDisabled} type="submit">
+            send
+          </PrimaryButton>
         </div>
       </form>
     </CardWrapper>
