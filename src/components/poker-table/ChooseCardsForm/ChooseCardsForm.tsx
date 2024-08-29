@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CardWrapper from '../../common/CardWrapper';
 
@@ -14,23 +14,31 @@ import {
   selectCard,
   setActionText,
   setDestination,
+  setResponseData,
   shuffleDeck,
 } from '../../../store/deck/actions';
-import { Card } from '../../../types/card';
+import { Card, RootState } from '../../../types/card';
 
 import styles from './ChooseCardsForm.module.less';
 import RadioButton from '../../common/RadionButton';
-import Suggestions from '../ai-suggestions/Suggestions';
-import { setSuggestion } from '../../../store/open-ai/actions';
 
-const ChooseCardsForm = ({ shuffledCards, actionText }) => {
+type ChooseCardsForm = {
+  shuffledCards: Card[];
+  actionText: string;
+};
+
+const ChooseCardsForm: FC<ChooseCardsForm> = ({
+  shuffledCards,
+  actionText,
+}) => {
   const [suit, setSuit] = useState('');
   const [rank, setRank] = useState('');
-  const cardsOnHand = useSelector((state) => state.deck.selectedCards);
-  const cardsOnTable = useSelector((state) => state.deck.renderedCards);
-  const suggestions = useSelector((state) => state.ai.suggestion);
-
-  // renderedCards: Card[];
+  const cardsOnHand = useSelector(
+    (state: RootState) => state.deck.selectedCards,
+  );
+  const cardsOnTable = useSelector(
+    (state: RootState) => state.deck.renderedCards,
+  );
 
   const [activeButton, setActiveButton] = useState('');
 
@@ -43,7 +51,13 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
       );
 
       if (!isCardInDeck) {
-        dispatch(selectCard({ suit, rank, id: `${suit}-${rank}` }));
+        dispatch(
+          selectCard({
+            suit,
+            rank,
+            id: `${suit}-${rank}`,
+          }),
+        );
       } else {
         dispatch(setActionText('Card has already been selected!'));
       }
@@ -54,7 +68,7 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
     e.preventDefault();
 
     const cards = [...cardsOnHand, ...cardsOnTable];
-    console.log('Submitting');
+
     const response = await fetch('http://localhost:3001/api/ai/poker', {
       method: 'POST',
       headers: {
@@ -64,9 +78,11 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
     });
 
     if (response.ok) {
-      const data = await response.json();
+      const res = await response.json();
+      console.log(res);
       //dispatch(setSuggestion(data.message));
-      dispatch(setActionText(data.message));
+      dispatch(setActionText(res.data?.aiSuggestion));
+      dispatch(setResponseData(res.data));
     } else {
       console.log('ERROR');
     }
@@ -80,11 +96,10 @@ const ChooseCardsForm = ({ shuffledCards, actionText }) => {
 
   return (
     <CardWrapper className={styles.formContainer}>
-      <Suggestions suggestions={suggestions} />
       <form onSubmit={submitHandler}>
         <div className={styles.formHeader}>
           {actionText.length !== 0 ? (
-            <h2>{actionText}</h2>
+            <h2 className={styles.actionTextWrapper}>{actionText}</h2>
           ) : (
             <h2>Select Cards</h2>
           )}

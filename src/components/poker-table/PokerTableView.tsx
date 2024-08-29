@@ -1,18 +1,20 @@
 import { FC } from 'react';
 import PokerTable from './PokerTable/PokerTable';
 import ChooseCardsForm from './ChooseCardsForm/ChooseCardsForm';
-import { Deck } from '../../types/card';
+import { RootState } from '../../types/card';
 
 import styles from './PokerTableView.module.less';
 import { useSelector } from 'react-redux';
 
-const PokerTableView: FC<Deck> = ({ deck }) => {
-  const shuffledCards = useSelector((state) => state.deck.shuffledCards);
-  const actionText = useSelector((state) => state.deck.actionText);
+const PokerTableView: FC = () => {
+  const shuffledCards = useSelector(
+    (state: RootState) => state.deck.shuffledCards,
+  );
+  const actionText = useSelector((state: RootState) => state.deck.actionText);
 
   return (
     <div className={styles.pokerTableWrapper}>
-      <PokerTable deck={deck} />
+      <PokerTable />
       <ChooseCardsForm shuffledCards={shuffledCards} actionText={actionText} />
     </div>
   );

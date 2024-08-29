@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { connect } from 'react-redux';
 
-import { Card, Deck } from '../../../types/card';
+import { Card, RootState } from '../../../types/card';
 
 import SingleCard from '../../cards/SingleCard';
 import ButtonContainer from '../ButtonContainer/ButtonContainer';
@@ -10,17 +10,36 @@ import * as cardActions from '../../../store/deck/actions';
 
 import styles from './PokerTable.module.less';
 
-const PokerTable: FC<Deck> = ({
-  shuffledCards,
-  actionText,
+interface PokerTableProps {
+  numberOfCuts: number;
+  renderedCards: Card[];
+  responseData: {
+    params: {
+      action: string;
+      color: string;
+      level: string;
+    };
+    currentRank: string;
+    handStrength: number;
+  };
+  cut: Function;
+  cutCard: Function;
+  renderCards: Function;
+  shuffleDeck: Function;
+  selectedCards: Card[];
+}
+
+const PokerTable: FC<PokerTableProps> = ({
   numberOfCuts,
   renderedCards,
+  responseData,
   cut,
   cutCard,
   renderCards,
   shuffleDeck,
   selectedCards,
 }) => {
+  console.log(responseData);
   return (
     <div className={styles.container}>
       <div>
@@ -47,7 +66,12 @@ const PokerTable: FC<Deck> = ({
             );
           })}
         </div>
-        <h2>Cards On Hands</h2>
+        <h2>
+          Cards On Hands{' '}
+          <span className={styles.actionClass}>
+            Action: {responseData.params.action.toUpperCase()}
+          </span>
+        </h2>
         <div className={styles.cardsOnHandContainer}>
           {selectedCards.length === 0 && <Extras cover="blue" />}
           {selectedCards.map((card) => {
@@ -63,25 +87,30 @@ const PokerTable: FC<Deck> = ({
           })}
         </div>
       </div>
-      <div className={styles.footer}>
+      <div
+        className={styles.footer}
+        style={{ backgroundColor: responseData.params.color }}
+      >
         <div className={styles.numberOfCuts}>{numberOfCuts}</div>
-        {<div className={styles.actionText}>{actionText}</div>}
+        <div>{responseData.currentRank}</div>
+        <div>Points: {responseData.handStrength}</div>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   shuffledCards: state.deck.shuffledCards,
   actionText: state.deck.actionText,
   numberOfCuts: state.deck.numberOfCuts,
   cut: state.deck.cut,
+  responseData: state.deck.responseData,
   renderedCards: state.deck.renderedCards,
   numberOfShuffles: state.deck.numberOfShuffles,
   selectedCards: state.deck.selectedCards,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
   cutCard: () => dispatch(cardActions.cutCard()),
   renderCards: (numToRender: number) =>
     dispatch(cardActions.renderCards(numToRender)),
@@ -89,4 +118,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 // eslint-disable-next-line react-refresh/only-export-components
+// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps)(PokerTable);
