@@ -39,7 +39,6 @@ const PokerTable: FC<PokerTableProps> = ({
   shuffleDeck,
   selectedCards,
 }) => {
-  console.log(responseData);
   return (
     <div className={styles.container}>
       <div>

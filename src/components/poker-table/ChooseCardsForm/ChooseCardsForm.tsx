@@ -125,7 +125,7 @@ const ChooseCardsForm: FC<ChooseCardsForm> = ({
           {actionText.length !== 0 ? (
             <h2 className={styles.actionTextWrapper}>{actionText}</h2>
           ) : (
-            <h2>Select Cards</h2>
+            <h2 className={styles.actionTextWrapper}>Select Cards</h2>
           )}
           <div className={styles.radioButtonsContainer}>
             <RadioButton
