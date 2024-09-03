@@ -101,6 +101,18 @@ const ChooseCardsForm: FC<ChooseCardsForm> = ({
       body: JSON.stringify(cards),
     });
 
+    if (!response.ok && response.status === 429) {
+      dispatch(
+        setActionText('You have exceeded the 10 requests in 24 hrs limit!'),
+      );
+      return;
+    }
+
+    if (!response.ok) {
+      dispatch(setActionText('Internal Error!'));
+      return;
+    }
+
     if (response.ok) {
       const res = await response.json();
       console.log(res);
