@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { OpenAI } from 'langchain/llms/openai';
@@ -11,6 +12,13 @@ import {
   getHandCardStrength,
   getHandIndicator,
 } from './utils.js';
+
+const limiter = rateLimit({
+  windowMs: 24 * 60 * 60 * 1000, // 24 hours
+  max: 10,
+  message: 'You have exceeded the 10 requests in 24 hrs limit!',
+  headers: true,
+});
 
 const PORT = process.env.PORT;
 
@@ -23,7 +31,7 @@ const llm = new OpenAI({
   modelName: 'gpt-3.5-turbo',
 });
 
-app.post('/api/ai/poker', async (req, res) => {
+app.post('/api/ai/poker', limiter, async (req, res) => {
   const data = req.body;
 
   const { stringPoker, objectPoker } = cardsToString(data);
